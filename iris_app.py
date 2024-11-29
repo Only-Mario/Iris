@@ -1,4 +1,22 @@
 import streamlit as st
+import subprocess
+import sys
+
+# Fonction pour installer automatiquement les dépendances
+def install_dependencies():
+    required_packages = [
+        "pandas", "seaborn", "matplotlib", "scikit-learn", "plotly", "streamlit"
+    ]
+    for package in required_packages:
+        try:
+            __import__(package)
+        except ImportError:
+            subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+
+# Appel de la fonction d'installation des dépendances
+install_dependencies()
+
+# Importation des bibliothèques après l'installation
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -8,7 +26,7 @@ import plotly.express as px
 from sklearn.preprocessing import StandardScaler
 
 # Configuration de la page
-st.set_page_config(page_title="Analyse complète des Iris", layout="wide")
+st.set_page_config(page_title="M. Merveille LIGAN Analyse complète des Iris", layout="wide")
 
 # Chargement des données
 iris = load_iris()
